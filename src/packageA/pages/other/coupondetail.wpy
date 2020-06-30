@@ -16,7 +16,7 @@
             </view>
         </view>
         <view class="instructions">
-            <view>使用说明</view>
+            <view>使用说明:</view>
             <text class="instructions-text">{{instructions}}</text>
         </view>
     </view>

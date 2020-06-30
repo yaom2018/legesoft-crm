@@ -105,6 +105,7 @@ export default class extends wepy.app {
     eid: 'LS000000',
     // eid: 'e20160913452612100',
     // eid: 'E20190924391312101', //集志服饰
+    // eid: 'E20170301450712101', //禹都欢乐购
     openid: '',
     unionid: '',
     sessionKey: '',
@@ -263,24 +264,34 @@ export default class extends wepy.app {
     return res
   }
 
-  async getVipInfo2(datames, userInfo) {
+  async getVipInfo2() {
     let parent = {
       eid: this.globalData.eid,
-      usOpenid: datames.openid,
-      usUnionid: datames.unionid ? datames.unionid : datames.openid,
-      usNickname: userInfo.nickName,
-      usSex: userInfo.gender,
-      usLanguage: userInfo.language,
-      usCity: userInfo.city,
-      usProvince: userInfo.province,
-      usCountry: userInfo.country,
-      usHeadimgurl: userInfo.avatarUrl,
+      usOpenid: this.globalData.openid,
+      usUnionid: this.globalData.unionid ? this.globalData.unionid : this.globalData.openid,
+      usNickname: this.globalData.userInfo.nickName,
+      usSex: this.globalData.userInfo.gender,
+      usLanguage: this.globalData.userInfo.language,
+      usCity: this.globalData.userInfo.city,
+      usProvince: this.globalData.userInfo.province,
+      usCountry: this.globalData.userInfo.country,
+      usHeadimgurl: this.globalData.userInfo.avatarUrl,
       usSubscribeTime: Date.parse(new Date()) / 1000
     }
     console.log(parent, '用户信息')
 
     const { data: res } = await wepy.post('/session/getparam', parent)
     // console.log(res, 888)
+    return res
+  }
+  async getVip2() {
+    let parent = {
+      vip: this.globalData.vipInfo.vid,
+      eid: this.globalData.eid
+    }
+    
+    const { data: res } = await wepy.post('/score/getwxvip', parent)
+    console.log(res, '会员信息2')
     return res
   }
 }

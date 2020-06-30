@@ -15,6 +15,8 @@ export default class Home extends wepy.mixin {
     }
     // 页面加载
     async onLoad(options) {
+      console.log(options);
+      this.instructions=options.instructions
       this.cid=options.cid
       this.$apply()
       this.getCard()

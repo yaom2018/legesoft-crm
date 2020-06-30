@@ -37,7 +37,7 @@
                         <view class="userMes">
                             <van-row class="mesLeft">
                               <van-col span="24" >
-                                  <h3 class="tel">{{vipInfo.phone}}</h3>
+                                  <h3 class="tel">{{vipInfo.vipname}}</h3>
                               </van-col>
                               <van-col span="24" >
                                   <span class="member">{{vipInfo.qpname}}</span>
@@ -55,7 +55,7 @@
                                 <h3 class="integral">积分: {{vipInfo.actualpoint}}</h3>
                             </view>
                             <view class="right" >
-                                <span class="member">余额: {{vipInfo.actualmoeny}}</span>
+                                <span class="member">余额: {{vipInfo.actualmoney}}元</span>
                             </view>
                     </view>
             </view>
@@ -106,7 +106,7 @@
             </view>
             <view class="couponDetail" bindtap='toMyCoupon'>
                  <image src="/assets/images/coupon.png" class="img">
-                <span>优惠券</span>
+                <span>我的优惠券</span>
                 <van-icon name="arrow" class="icon" />
             </view>
             <view class="couponDetail" bindtap='toInformation'>

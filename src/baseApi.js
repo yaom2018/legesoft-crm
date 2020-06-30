@@ -40,8 +40,8 @@ wepy.hLoad = () => {
 // get
 // const baseURL = 'https://m.ligesoft.com/wx/wxsa'
 // const baseURL = 'https://b2bc.ligesoft.com/wx/wxsa'
-// const baseURL = 'http://t.ligesoft.com/wx/wxsa'
-const baseURL = 'http://192.168.10.104:9091/wx/wxsa'
+const baseURL = 'http://t.ligesoft.com/wx/wxsa'
+// const baseURL = 'http://192.168.10.104:9091/wx/wxsa'
 wepy.get = (url, data = {}) => {
     return wepy.request({
         url: baseURL + url,

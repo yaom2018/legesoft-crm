@@ -20,6 +20,14 @@ export default class Home extends wepy.mixin {
     }
     // 页面切换显示
     async onShow() {
+      if(this.vipInfo){
+        const res=await this.$parent.getVip2()
+        console.log(res,'home');
+        this.vipInfo=res.t
+        this.$parent.globalData.vipInfo=res.t
+        this.$apply()
+      }
+      
         // if(this.vipInfo){
         //     // 获取卡券
         //     const couponres=await this.$parent.getcounon(0)
@@ -40,7 +48,6 @@ export default class Home extends wepy.mixin {
         console.log(loginRes,'wxlogin')
         this.$parent.globalData.code = loginRes.code
         console.log(this.$parent.globalData.code,'code')
-        
         this.getLoginstatu()
         // // 动态修改我的福利图标的位置
         // const res = wx.getSystemInfoSync()
@@ -129,10 +136,11 @@ export default class Home extends wepy.mixin {
     // 缓存中获取数据
     var datames = wx.getStorageSync('datames')
     console.log(datames,'老用户登录');
-    
+    this.$parent.globalData.openid=datames.openid
+    this.$parent.globalData.unionid=datames.unionid
     // 请求服务器获取vipinfo
     // 发起老用户登录
-    let getparamres=await this.$parent.getVipInfo2(datames,this.userInfo)
+    let getparamres=await this.$parent.getVipInfo2()
     console.log(getparamres,'老用户登录结果')
     // 如果失败了
     if(!getparamres.statu){
@@ -143,6 +151,7 @@ export default class Home extends wepy.mixin {
       return
     }
     // 赋值
+    getparamres.t.actualmoney=getparamres.t.actualmoeny
     this.$parent.globalData.vipInfo=getparamres.t
     this.vipInfo=getparamres.t
 
@@ -197,6 +206,7 @@ export default class Home extends wepy.mixin {
           return
         }
         // 赋值
+        getparamres.t.actualmoney=getparamres.t.actualmoeny
         this.$parent.globalData.vipInfo=getparamres.t
         this.vipInfo=getparamres.t
         // this.$apply()
@@ -225,7 +235,6 @@ export default class Home extends wepy.mixin {
         }
         // 存入本地缓存---------------------------
         wx.setStorageSync('datames', datames)
-        
         this.$parent.globalData.openid=getparamres.t.wxid
         this.$parent.globalData.unionid=getparamres.t.unionid
         // 获取卡券
@@ -260,7 +269,7 @@ export default class Home extends wepy.mixin {
         },
         // 前往订单
         toOrder(e) {
-            if (!this.login) return wepy.Toast('请先登录')
+            // if (!this.login) return wepy.Toast('请先登录')
             wepy.navigateTo({
                 url: '/packageB/pages/other/order?otype=' + e.currentTarget.id
             })

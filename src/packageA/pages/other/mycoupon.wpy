@@ -23,8 +23,9 @@
                 id="{{coupon.id}}"
                 data-id="{{coupon.id}}"
                 data-cid="{{coupon.cid}}"
+                data-instructions="{{coupon.instructions}}"
                 bindtap="couponDetail"
-            >
+              >
                 <view class="couponbox-top">
                     <view class="couponbox-left">
                         <text class="couponbox-left-denomination">{{coupon.mmoney}}</text>
@@ -54,6 +55,8 @@
                     <view class="couponbox-right-text">适用范围:{{coupon.instructions}}</view>
                 </view>
             </view>
+            <!-- 数据加载完毕后的提示消息 -->
+		      <view class="over_line" hidden="{{!isLoading}}">-------- 我是有底线的 --------</view>
         </view>
     </view>
 </template>
@@ -73,7 +76,13 @@ export default class Home extends wepy.page {
 page {
   background-color: #f7f7f7;
 }
-
+.over_line {
+    font-size: 24rpx;
+    text-align: center;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #ddd;
+  }
 .nocoupon {
 margin: 30rpx 0;
   padding: 0 100rpx;
